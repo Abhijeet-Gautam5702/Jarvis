@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jarvis/feature_card.dart';
+import 'package:jarvis/input_prompt.dart';
 import 'package:jarvis/pallete.dart';
 
 class HomePage extends StatefulWidget {
@@ -10,6 +11,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  bool inputBeingGiven = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,11 +31,12 @@ class _HomePageState extends State<HomePage> {
         ),
         centerTitle: true,
       ),
-      body: Column(
+      body: SingleChildScrollView(
+          child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         // crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          //virtual assistant picture
+          // virtual assistant picture
           Stack(
             children: [
               Center(
@@ -64,7 +68,8 @@ class _HomePageState extends State<HomePage> {
               ),
             ],
           ),
-          //virtual assistant welcome chat bubble
+
+          // virtual assistant welcome chat bubble
           Container(
             padding: const EdgeInsets.symmetric(
               horizontal: 20,
@@ -93,7 +98,8 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          //suggested commands
+
+          // suggested commands
           Align(
             alignment: Alignment.centerLeft,
             child: Padding(
@@ -114,7 +120,8 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          //features list
+
+          // features list
           Column(
             children: const [
               FeatureBox(
@@ -135,14 +142,45 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ],
-      ),
+      )),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          setState(
+            () {
+              inputBeingGiven = !inputBeingGiven;
+              Navigator.of(context).push(
+                PageRouteBuilder(
+                  opaque: false,
+                  pageBuilder: (context, _, __) {
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: const InputPrompt(),
+                    );
+                  },
+                  //     // transitionsBuilder: (BuildContext context,
+                  //     //     Animation<double> animation,
+                  //     //     Animation<double> secondaryAnimation,
+                  //     //     Widget child) {
+                  //     //   return SlideTransition(
+                  //     //     position: Tween<Offset>(
+                  //     //       begin: const Offset(0.0, 1.0),
+                  //     //       end: Offset.zero,
+                  //     //     ).animate(animation),
+                  //     //     child: child,
+                  //     //   );
+                  //     // },
+                ),
+              );
+            },
+          );
+        },
         backgroundColor: Pallete.assistantCircleColor,
         elevation: 3,
         // shape: const CircleBorder(),
         child: const Icon(
-          Icons.mic,
+          Icons.keyboard,
           size: 27,
         ),
       ),
