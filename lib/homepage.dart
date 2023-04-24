@@ -152,12 +152,13 @@ class _HomePageState extends State<HomePage> {
                 PageRouteBuilder(
                   opaque: false,
                   pageBuilder: (context, _, __) {
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: const InputPrompt(),
-                    );
+                    return InputPrompt();
+                    // return GestureDetector(
+                    //   onTap: () {
+                    //     Navigator.pop(context);
+                    //   },
+                    //   child: const InputPrompt(),
+                    // );
                   },
                   //     // transitionsBuilder: (BuildContext context,
                   //     //     Animation<double> animation,

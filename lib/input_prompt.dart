@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:jarvis/open_ai_service.dart';
+import 'package:jarvis/pallete.dart';
 
 class InputPrompt extends StatefulWidget {
   const InputPrompt({super.key});
@@ -10,6 +12,9 @@ class InputPrompt extends StatefulWidget {
 class _InputPromptState extends State<InputPrompt> {
   TextEditingController promptController = TextEditingController();
   String prompt = '';
+  String chatSpeech = '';
+
+  final OpenAiService openAiService = OpenAiService();
 
   @override
   void dispose() {
@@ -37,39 +42,69 @@ class _InputPromptState extends State<InputPrompt> {
         ),
         centerTitle: true,
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: TextField(
-              controller: promptController,
-              autocorrect: true,
-              autofocus: true,
-              maxLength: 200,
-              maxLines: null,
-              keyboardType: TextInputType.multiline,
-              decoration: const InputDecoration(
-                hintText: 'Give me a prompt...',
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Container(
+                margin: const EdgeInsets.symmetric(
+                  horizontal: 15,
+                ),
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Pallete.borderColor,
+                  ),
+                  borderRadius: BorderRadius.circular(20).copyWith(
+                    topLeft: Radius.zero,
+                  ),
+                ),
+                child: Text(
+                  chatSpeech == "" ? "Ask me" : chatSpeech,
+                ),
               ),
             ),
-          ),
-          ElevatedButton(
-            style: ButtonStyle(
-              elevation: MaterialStateProperty.all(2),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.85,
+                  padding: EdgeInsets.all(8),
+                  child: TextField(
+                    controller: promptController,
+                    autocorrect: true,
+                    autofocus: true,
+                    maxLength: 200,
+                    maxLines: null,
+                    keyboardType: TextInputType.multiline,
+                    decoration: const InputDecoration(
+                      hintText: 'Give me a prompt...',
+                    ),
+                  ),
+                ),
+                IconButton(
+                  onPressed: () async {
+                    setState(
+                      () {
+                        prompt = promptController.value.text.toString();
+                      },
+                    );
+                    final speech = await openAiService.isArtImagePrompt(prompt);
+                    setState(() {
+                      chatSpeech = speech;
+                    });
+                    print(speech);
+                    promptController.clear();
+                  },
+                  icon: Icon(
+                    Icons.send,
+                  ),
+                ),
+              ],
             ),
-            onPressed: () {
-              setState(
-                () {
-                  prompt = promptController.value.text.toString();
-                },
-              );
-              promptController.clear();
-            },
-            child: const Text(
-              "Submit",
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
