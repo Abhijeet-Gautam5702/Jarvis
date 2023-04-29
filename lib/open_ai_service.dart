@@ -4,7 +4,12 @@ import 'package:http/http.dart' as http;
 import 'secrets.dart';
 
 class OpenAiService {
-  final List<Map<String, String>> messages = [];
+  final List<Map<String, String>> messages = [
+    {
+      'role': 'user',
+      'content': 'Ensure all your responses are within 200 words.',
+    },
+  ];
 
   Future<String> isArtImagePrompt(String prompt) async {
     try {
@@ -30,7 +35,7 @@ class OpenAiService {
         ),
       );
 
-      // print(res.body);
+      print(res.body);
 
       if (res.statusCode == 200) {
         String response =
@@ -97,7 +102,7 @@ class OpenAiService {
         );
         return response;
       }
-      return "Oops! An Internal Error occured.";
+      return "Oops! An Internal Error occured. \nYou might have exhausted the request limit for the free-tier (3 requests/min). Please try after 1 minute";
     } catch (error) {
       return error.toString();
     }

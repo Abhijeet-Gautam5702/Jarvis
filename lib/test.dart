@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:jarvis/open_ai_service.dart';
 import 'package:jarvis/pallete.dart';
 
-class InputPrompt extends StatefulWidget {
-  const InputPrompt({super.key});
+class TestPrompt extends StatefulWidget {
+  const TestPrompt({super.key});
 
   @override
-  State<InputPrompt> createState() => _InputPromptState();
+  State<TestPrompt> createState() => _TestPromptState();
 }
 
-class _InputPromptState extends State<InputPrompt> {
+class _TestPromptState extends State<TestPrompt> {
   TextEditingController promptController = TextEditingController();
   String prompt = '';
   String chatSpeech = '';
@@ -24,48 +24,34 @@ class _InputPromptState extends State<InputPrompt> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: const Icon(
-            Icons.arrow_back,
-          ),
-        ),
-        title: const Text(
-          'JARVIS',
-          style: TextStyle(
-            fontSize: 18,
-          ),
-        ),
-        centerTitle: true,
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Container(
-                margin: const EdgeInsets.symmetric(
-                  horizontal: 15,
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          // Chat Bubble
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Container(
+              margin: const EdgeInsets.symmetric(
+                horizontal: 15,
+              ),
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Pallete.borderColor,
                 ),
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Pallete.borderColor,
-                  ),
-                  borderRadius: BorderRadius.circular(20).copyWith(
-                    topLeft: Radius.zero,
-                  ),
-                ),
-                child: Text(
-                  chatSpeech == "" ? "Ask me" : chatSpeech,
+                borderRadius: BorderRadius.circular(20).copyWith(
+                  topLeft: Radius.zero,
                 ),
               ),
+              child: Text(
+                chatSpeech == "" ? "Ask me" : chatSpeech,
+              ),
             ),
-            Row(
+          ),
+          // Input Text-field
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
@@ -103,8 +89,8 @@ class _InputPromptState extends State<InputPrompt> {
                 ),
               ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
