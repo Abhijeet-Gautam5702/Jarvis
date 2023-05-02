@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'secrets.dart';
+// import 'secrets.dart';
+
+const openAIApiKey = "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";
 
 class OpenAiService {
   final List<Map<String, String>> messages = [
