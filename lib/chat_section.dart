@@ -14,6 +14,8 @@ class _ChatSectionState extends State<ChatSection> {
   String prompt = '';
   String chatSpeech = '';
 
+  bool showLoader = false;
+
   final OpenAiService openAiService = OpenAiService();
 
   @override
@@ -32,27 +34,58 @@ class _ChatSectionState extends State<ChatSection> {
             child: Align(
               alignment: Alignment.topLeft,
               //chatGPT response chat bubble
-              child: Container(
-                margin: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 20,
-                ),
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Pallete.borderColor,
-                  ),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Text(
-                  chatSpeech == "" ? "HEY ! How may I help you?" : chatSpeech,
-                  style: const TextStyle(
-                    color: Pallete.borderColor,
-                    fontFamily: "Cera Pro",
-                    // fontWeight: FontWeight.w400,
-                  ),
-                ),
-              ),
+              child: showLoader == true
+                  ? const Center(
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                          top: 30.0,
+                        ),
+                        child: CircularProgressIndicator(
+                          color: Pallete.primaryColor,
+                        ),
+                      ),
+                    )
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            top: 15.0,
+                          ),
+                          child: Image.asset(
+                            "./assets/images/icon2.png",
+                            width: 40,
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(
+                              horizontal: 10,
+                              vertical: 20,
+                            ),
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Pallete.borderColor,
+                              ),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Text(
+                              chatSpeech == ""
+                                  ? "HEY ! How may I help you?"
+                                  : chatSpeech,
+                              style: const TextStyle(
+                                color: Pallete.borderColor,
+                                fontFamily: "Cera Pro",
+                                // fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
             ),
           ),
         ),
@@ -83,7 +116,7 @@ class _ChatSectionState extends State<ChatSection> {
               Expanded(
                 child: Container(
                   // width: MediaQuery.of(context).size.width * 0.8,
-                  padding: EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   child: TextField(
                     cursorColor: Colors.grey,
                     cursorHeight: 30,
@@ -114,31 +147,26 @@ class _ChatSectionState extends State<ChatSection> {
               ),
 
               // send button
-              Container(
-                // decoration: BoxDecoration(
-                //   border: Border.all(
-                //     color: Colors.red,
-                //   ),
-                // ),
-                child: IconButton(
-                  onPressed: () async {
-                    setState(
-                      () {
-                        prompt = promptController.value.text.toString();
-                      },
-                    );
-                    final speech = await openAiService.isArtImagePrompt(prompt);
-                    setState(() {
-                      chatSpeech = speech;
-                    });
-                    // print(speech);
-                    promptController.clear();
-                  },
-                  icon: const Icon(
-                    Icons.send,
-                    color: Pallete.primaryColor,
-                    size: 26,
-                  ),
+              IconButton(
+                onPressed: () async {
+                  setState(
+                    () {
+                      prompt = promptController.value.text.toString();
+                      showLoader = true;
+                    },
+                  );
+                  final speech = await openAiService.isArtImagePrompt(prompt);
+                  setState(() {
+                    chatSpeech = speech;
+                    showLoader = false;
+                  });
+                  // print(speech);
+                  promptController.clear();
+                },
+                icon: const Icon(
+                  Icons.send,
+                  color: Pallete.primaryColor,
+                  size: 26,
                 ),
               ),
             ],

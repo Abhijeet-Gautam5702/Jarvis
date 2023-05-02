@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:jarvis/feature_card.dart';
-import 'package:jarvis/input_prompt.dart';
+// import 'package:jarvis/feature_card.dart';
+// import 'package:jarvis/input_prompt.dart';
 import 'package:jarvis/chat_section.dart';
 import 'package:jarvis/pallete.dart';
 
@@ -18,12 +18,12 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Image.asset(
-            "./assets/images/icon2.png",
-          ),
-        ),
+        // leading: Padding(
+        //   padding: const EdgeInsets.all(8.0),
+        //   child: Image.asset(
+        //     "./assets/images/icon2.png",
+        //   ),
+        // ),
         backgroundColor: Pallete.appBarColor,
         elevation: 2,
         title: const Text(
@@ -38,10 +38,10 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Pallete.chatColor,
         ),
-        child: ChatSection(),
+        child: const ChatSection(),
       ),
 
       /*

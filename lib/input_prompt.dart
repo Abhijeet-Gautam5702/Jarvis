@@ -70,7 +70,7 @@ class _InputPromptState extends State<InputPrompt> {
               children: [
                 Container(
                   width: MediaQuery.of(context).size.width * 0.85,
-                  padding: EdgeInsets.all(8),
+                  padding:const EdgeInsets.all(8),
                   child: TextField(
                     controller: promptController,
                     autocorrect: true,
