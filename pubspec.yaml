@@ -38,6 +38,7 @@ dependencies:
   # speech_to_text: ^6.1.1
   http: ^0.13.5
   flutter_launcher_icons: ^0.12.0
+  flutter_dotenv: ^5.0.2
 
 dev_dependencies:
   flutter_test:
@@ -81,6 +82,7 @@ flutter:
   assets:
     - assets/images/
     - assets/sounds/
+    - .env
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

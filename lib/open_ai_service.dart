@@ -1,9 +1,10 @@
 import 'dart:convert';
 
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 // import 'secrets.dart';
 
-const openAIApiKey = "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";
+var openAIApiKey = dotenv.env['OPEN_AI_API_KEY'];
 
 class OpenAiService {
   final List<Map<String, String>> messages = [
@@ -37,7 +38,7 @@ class OpenAiService {
         ),
       );
 
-      print(res.body);
+      // print(res.body);
 
       if (res.statusCode == 200) {
         String response =
