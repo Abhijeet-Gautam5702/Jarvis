@@ -7,6 +7,13 @@ JARVIS is an AI assistant mobile application built using Flutter, using OpenAI A
 3. Run `flutter build apk --release` in the terminal. A release apk will be created (Note: It will take quite some time) and its path will be shown on the terminal.
 4. Transfer the apk to your mobile, install and run/test the application. (Note that you may have to allow installation from unknown sources in your mobile settings.)
 
+## Screenshots
+
+![App Screenshot](https://i.postimg.cc/Rhwqh8Z1/Tweelet-1.png) 
+
+![App Screenshot](https://i.postimg.cc/FRdY51tB/Tweelet-2.png)
+
+
 ## How to set up your own OpenAI API key
 
 - (https://www.howtogeek.com/885918/how-to-get-an-openai-api-key/)
