@@ -1,3 +1,6 @@
+
+![App Screenshot](https://i.postimg.cc/Rhwqh8Z1/Tweelet-1.png) 
+
 # JARVIS 
 JARVIS is an AI assistant mobile application built using Flutter, using OpenAI API to chat with the users. Type in a prompt and get your answers right away. JARVIS uses the OpenAI API to post requests and fetch responses
 
@@ -6,13 +9,6 @@ JARVIS is an AI assistant mobile application built using Flutter, using OpenAI A
 2. In the root directory, create a `.env file` and type the following: `OPEN_AI_API_KEY = "your_own_api_key"`.
 3. Run `flutter build apk --release` in the terminal. A release apk will be created (Note: It will take quite some time) and its path will be shown on the terminal.
 4. Transfer the apk to your mobile, install and run/test the application. (Note that you may have to allow installation from unknown sources in your mobile settings.)
-
-## Screenshots
-
-![App Screenshot](https://i.postimg.cc/Rhwqh8Z1/Tweelet-1.png) 
-
-![App Screenshot](https://i.postimg.cc/FRdY51tB/Tweelet-2.png)
-
 
 ## How to set up your own OpenAI API key
 
