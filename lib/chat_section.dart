@@ -79,7 +79,6 @@ class _ChatSectionState extends State<ChatSection> {
                               style: const TextStyle(
                                 color: Pallete.borderColor,
                                 fontFamily: "Cera Pro",
-                                // fontWeight: FontWeight.w400,
                               ),
                             ),
                           ),
@@ -95,9 +94,6 @@ class _ChatSectionState extends State<ChatSection> {
           height: MediaQuery.of(context).size.height * 0.12,
           decoration: const BoxDecoration(
             color: Pallete.textFieldColor,
-            // border: Border.all(
-            //   color: Colors.red,
-            // ),
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(
                 0,
@@ -176,3 +172,11 @@ class _ChatSectionState extends State<ChatSection> {
     );
   }
 }
+
+
+
+
+
+
+
+

@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
-// import 'secrets.dart';
 
 var openAIApiKey = dotenv.env['OPEN_AI_API_KEY'];
 
@@ -111,6 +110,7 @@ class OpenAiService {
     }
   }
 
+  // this function is incomplete
   Future<String> dallEApi(String prompt) async {
     return "Dall-E";
   }
